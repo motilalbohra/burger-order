@@ -5,10 +5,21 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import reducer from './store/reducer';
-import { createStore } from 'redux'
+import burgerBuilderReducer from './store/reducer/burgerBuilder';
+import { createStore ,applyMiddleware ,compose,combineReducers } from 'redux'
+import authReducer from './store/reducer/auth';
+import thunk from 'redux-thunk';
 
-const store =createStore(reducer);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const rootReducer = combineReducers({
+ 
+  authReducer:authReducer,
+   burgerBuilder :burgerBuilderReducer,
+}); 
+
+const store =createStore(burgerBuilderReducer ,composeEnhancers(
+  applyMiddleware(thunk)
+));
 
 const app =( 
   <Provider store={store}>

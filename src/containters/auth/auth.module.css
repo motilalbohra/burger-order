@@ -1,22 +1,22 @@
-.ContactData{
+.Auth{
     margin: auto auto;
     width: 80%;
     text-align: center;
     margin-top: 360px;
 }
 @media (max-width:1000px){
-    .ContactData{
+    .Auth{
         margin-top: 200px;
     }
 }
 @media (min-width:600px){
-    .ContactData{
+    .Auth{
         width: 500px;
         
     }
 }
 @media (max-width:499px){
-    .ContactData{
+    .Auth{
         margin-top: 50px;
     }
 }

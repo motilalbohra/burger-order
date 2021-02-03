@@ -4,10 +4,9 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
-import axios from '../../axios-order';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import { connect } from 'react-redux';
-import * as actionType from '../../store/action';
+import * as BurgerBuilderActions from '../../store/action/index';
 
 
 
@@ -16,12 +15,6 @@ class BurgerBuilder extends Component {
         purchase:false,
         loading:false
      }
-    //  componentDidMount () {
-    //      axios.get('https://react-burger-order-da9e6.firebaseio.com/ingredient.json')
-    //           .then(response => {
-    //               this.setState({ingredient:response.data})
-    //           })
-    //  }
      updatePurchasableState (ingredient) {
        
          const sum = Object.keys(ingredient)
@@ -34,6 +27,10 @@ class BurgerBuilder extends Component {
         return sum>0
 
 
+     }
+     componentDidMount(){
+         console.log(this.props)
+         this.props.onInitIngredients();
      }
 
      purchaseHandler = () =>{
@@ -104,8 +101,9 @@ const mapStateTOProps = state =>{
 
 const mapDispatchToProps= dispatch => {
     return {
-        onIngredientAdded :  (ingName)=> dispatch({type:actionType.ADD_INGREDIENT,ingredientName:ingName}),
-        onIngredientRemoved: (ingName)=> dispatch({type:actionType.REMOVE_INGREDIENT, ingredientName:ingName})
+        onIngredientAdded :  (ingName)=> dispatch(BurgerBuilderActions.addIngredient(ingName)),
+        onIngredientRemoved: (ingName)=> dispatch(BurgerBuilderActions.removeIngredient(ingName)),
+        onInitIngredients : () => dispatch(BurgerBuilderActions.initIngredients())
     }
 }
  
